@@ -37,6 +37,13 @@ class Row < SimpleDelegator
     }
   end
 
+  def investing_attributes
+    {
+      round_type: funding_round_type,
+      amount: raised_amount_usd
+    }
+  end
+
   private
 
   def build_struct(row)

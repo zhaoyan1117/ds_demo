@@ -20,8 +20,11 @@ class Importer
   end
 
   def import_row(row)
-    company = find_or_create_company row
     investor = find_or_create_investor row
+    company = find_or_create_company row
+
+    Investing.create row.investing_attributes.merge({investor: investor,
+                                                     company: company})
   end
 
   def find_or_create_company(row)

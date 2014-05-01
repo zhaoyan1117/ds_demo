@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140501023955) do
+ActiveRecord::Schema.define(version: 20140501042423) do
 
   create_table "companies", force: true do |t|
     t.string   "permalink"
@@ -28,6 +28,18 @@ ActiveRecord::Schema.define(version: 20140501023955) do
 
   add_index "companies", ["neo_id"], name: "index_companies_on_neo_id", unique: true, using: :btree
   add_index "companies", ["permalink"], name: "index_companies_on_permalink", unique: true, using: :btree
+
+  create_table "investings", force: true do |t|
+    t.integer  "company_id"
+    t.integer  "investor_id"
+    t.string   "round_type"
+    t.integer  "amount",      limit: 8
+    t.integer  "neo_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "investings", ["neo_id"], name: "index_investings_on_neo_id", using: :btree
 
   create_table "investors", force: true do |t|
     t.string   "permalink"
