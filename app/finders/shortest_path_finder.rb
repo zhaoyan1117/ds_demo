@@ -1,5 +1,7 @@
 class ShortestPathFinder
   def initialize(source, target)
+    return nil if source.try(:empty?) || target.try(:empty?)
+
     @source = Investor.where(Investor.arel_table[:name].matches("#{source}%"))
                       .order(name: :asc).first
     @target = Investor.where(Investor.arel_table[:name].matches("#{target}%"))
