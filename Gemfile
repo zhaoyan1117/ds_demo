@@ -10,6 +10,7 @@ group :development, :test do
   gem 'debugger'
   gem 'mysql2'
   gem 'spring'
+  gem 'rubocop', require: false
 end
 
 gem 'sass-rails', '~> 4.0.3'

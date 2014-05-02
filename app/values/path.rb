@@ -23,6 +23,11 @@ class Path
     (@path.size+1)/2 - 1
   end
 
+  def empty?
+    return true unless @path
+    @path.empty?
+  end
+
   def to_s
     result = ''
     @path.each do |node|
@@ -36,7 +41,26 @@ class Path
     result
   end
 
+  def to_json
+    to_d3_force_data.to_json
+  end
+
+
   private
+
+  def to_d3_force_data
+    links = []
+    0.upto(@path.size-2) do |i|
+      links.push(source: i, target: i+1)
+    end
+
+    nodes = []
+    @path.each do |n|
+      nodes.push(name: n.name, url: n.crunchbase_link)
+    end
+
+    {links: links, nodes: nodes}
+  end
 
   def c_to_i
     ' <-invested- '
