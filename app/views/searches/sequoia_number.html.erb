@@ -1,6 +1,7 @@
 <%= form_tag '/search/sequoia_number', method: 'get' do %>
   <p>
-    <%= text_field_tag :name, params[:name] %>
+    <%= text_field_tag :source, params[:source] %>
+    <%= text_field_tag :target, target_value(params[:target]) %>
     <%= submit_tag "Search", name: nil %>
   </p>
 <% end %>
@@ -20,7 +21,7 @@
 
 <script>
 
-var width = 960,
+var width = 1000,
     height = 500
 
 var svg = d3.select("body").append("svg")
@@ -29,8 +30,8 @@ var svg = d3.select("body").append("svg")
 
 var force = d3.layout.force()
     .gravity(.05)
-    .distance(100)
-    .charge(-3000)
+    .distance(150)
+    .charge(-500)
     .size([width, height]);
 
 data = <%= @path.to_json.html_safe %>
@@ -61,10 +62,10 @@ node.append("image")
     })
     .attr("x", -8)
     .attr("y", -8)
-    .attr("width", 16)
     .on('click', function(d){
         window.open(d.url, '_blank');
     })
+    .attr("width", 16)
     .attr("height", 16);
 
 node.append("text")

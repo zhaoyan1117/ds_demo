@@ -1,7 +1,8 @@
 class SearchesController < ApplicationController
   def sequoia_number
-    name = params[:name]
+    source = params[:source]
+    target = params[:target]
 
-    @path = ShortestPathToSequoia.new(name).find
+    @path = ShortestPathFinder.new(source, target).find
   end
 end
