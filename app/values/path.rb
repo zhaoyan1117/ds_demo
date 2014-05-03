@@ -41,10 +41,9 @@ class Path
     result
   end
 
-  def to_json
-    to_d3_force_data.to_json
+  def as_json(option = {})
+    to_d3_force_data.as_json(option)
   end
-
 
   private
 
@@ -56,10 +55,18 @@ class Path
 
     nodes = []
     @path.each do |n|
-      nodes.push(name: n.name, url: n.crunchbase_link)
+      attributes = {name: n.name, url: n.crunchbase_link}
+
+      if @path.index(n) == 0
+        attributes.merge!({source: true, fixed: true, x: 35, y: 20})
+      elsif n == @path.last
+        attributes.merge!({target: true, fixed: true, x: 900, y: 460})
+      end
+
+      nodes.push(attributes)
     end
 
-    {links: links, nodes: nodes}
+    {links: links, nodes: nodes}.merge(degrees: degrees)
   end
 
   def c_to_i

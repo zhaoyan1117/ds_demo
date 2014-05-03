@@ -1,60 +1,100 @@
 <div id='sequoia'>
-    <%= form_tag '/search/sequoia_number', method: 'get' do %>
-      <p>
-        <%= text_field_tag :source, params[:source] %>
-        <%= text_field_tag :target, target_value(params[:target]) %>
-        <%= submit_tag "Search", name: nil %>
-      </p>
-    <% end %>
+    <div id='sequoia-form'>
+        <%= form_tag '/search_sequoia_number', method: 'get' do %>
+          <p>
+            What's the degree of separation between
+            <%= text_field_tag :source %>
+            and
+            <%= text_field_tag :target, 'Sequoia Capital' %> ?
+            <%= submit_tag "Tell me!", id: 'sequoia-form-submit' %>
+          </p>
+        <% end %>
+    </div>
 
-    <% unless @path %>
-        <h1>haha</h1>
-    <% else %>
-        <style>
-        .link {
-          stroke: #000;
-          stroke-width: 1.5px;
-        }
-        .node text {
-          pointer-events: none;
-          font: 20px sans-serif;
-        }
-        </style>
+    <div id='sequoia-desc'>
+        Please specify source and target.
+    </div>
 
-        <script src="http://d3js.org/d3.v3.min.js"></script>
+    <style>
+    .link {
+      stroke: #000;
+      stroke-width: 1.5px;
+    }
+    .node text {
+      pointer-events: none;
+      font: 15px;
+    }
+    </style>
 
-        <script>
-        var width = 950,
-            height = 500
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script>
+    var width = 950,
+        height = 500
 
-        var svg = d3.select("#sequoia").append("svg")
-            .attr("width", width)
-            .attr("height", height);
+    var svg = d3.select("#sequoia").append("svg")
+        .attr("width", width)
+        .attr("height", height);
 
-        var force = d3.layout.force()
-            .gravity(.05)
-            .distance(150)
-            .charge(-500)
-            .size([width, height]);
+    var force = d3.layout.force()
+        .gravity(.05)
+        .distance(250)
+        .charge(-400)
+        .size([width, height]);
 
-        data = <%= @path.to_json.html_safe %>
+    var drag = force.drag()
+        .on("dragstart", dragstart);
 
+    var data, link, node;
+
+    $('form').submit(function(event){
+        var form = $(this);
+
+        $.ajax({
+          type: form.attr('method'),
+          url: form.attr('action'),
+          data: form.serialize(),
+          dataType: 'json',
+          success: function(json, textStatus, jqXHR) {
+            if (json.error) {
+                $('#sequoia-desc').html(json.error);
+                clean();
+            } else {
+                data = json;
+                $('#sequoia-desc').html(json.degrees + ' degree of separation!');
+                visualizeit();
+            }
+          }
+        });
+
+        event.preventDefault();
+    });
+
+    function clean() {
+        $('line').remove();
+        $('g').remove();
+    }
+
+    function visualizeit() {
         force
             .nodes(data.nodes)
             .links(data.links)
             .start();
 
-        var link = svg.selectAll(".link")
+        link = svg.selectAll(".link")
             .data(data.links)
-            .enter().append("line")
+        link.exit().remove();
+        link.enter().append("line")
             .attr("class", "link");
 
-        var node = svg.selectAll(".node")
+        node = svg.selectAll(".node")
             .data(data.nodes)
-            .enter().append("g")
+        node.exit().remove();
+        node.enter().append("g")
             .attr("class", "node")
-            .call(force.drag);
+            .on("dblclick", dblclick)
+            .call(drag);
 
+        $('g image').remove();
         node.append("image")
             .attr("xlink:href", function(d) {
                 if (d.index%2==0) {
@@ -68,9 +108,22 @@
             .attr("width", 30)
             .attr("height", 30);
 
+        $('g text').remove();
         node.append("text")
-            .attr("dx", 12)
-            .attr("dy", ".35em")
+            .attr("dx", function(d) {
+                if(d.target){
+                    return -120;
+                }else {
+                    return 25;
+                }
+            })
+            .attr("dy", function(d) {
+                if(d.target){
+                    return 10;
+                }else {
+                    return 0;
+                }
+            })
             .on('click', function(d){
                 window.open(d.url, '_blank');
             })
@@ -84,6 +137,15 @@
 
           node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
         });
-        </script>
-    <% end %>
+    }
+
+
+    function dblclick(d) {
+        d.fixed = false;
+    }
+
+    function dragstart(d) {
+        d.fixed = true;
+    }
+    </script>
 </div>
