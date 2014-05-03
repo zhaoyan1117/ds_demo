@@ -112,22 +112,24 @@
             node.append("text")
                 .attr("dx", function(d) {
                     if(d.target){
-                        return -120;
+                        return -50;
                     }else {
                         return 25;
                     }
                 })
                 .attr("dy", function(d) {
                     if(d.target){
-                        return 10;
+                        return 40;
                     }else {
                         return 0;
                     }
                 })
-                .on('click', function(d){
-                    window.open(d.url, '_blank');
-                })
                 .text(function(d) { return d.name });
+
+            $('g text').on('click', function(d){
+                alert('haha');
+                window.open(d.url, '_blank');
+            });
 
             force.on("tick", function() {
               link.attr("x1", function(d) { return d.source.x; })

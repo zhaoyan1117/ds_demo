@@ -58,9 +58,9 @@ class Path
       attributes = {name: n.name, url: n.crunchbase_link}
 
       if @path.index(n) == 0
-        attributes.merge!({source: true, fixed: true, x: 35, y: 20})
+        attributes.merge!({source: true, fixed: true, x: 70, y: 45})
       elsif n == @path.last
-        attributes.merge!({target: true, fixed: true, x: 900, y: 460})
+        attributes.merge!({target: true, fixed: true, x: 860, y: 420})
       end
 
       nodes.push(attributes)
