@@ -1,8 +1,8 @@
-class SearchesController < ApplicationController
-  def sequoia_number
+class SequoiaController < ApplicationController
+  def show
   end
 
-  def search_sequoia_number
+  def search
     @source = params[:source]
     @target = params[:target]
 

@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
-  root 'searches#sequoia_number'
-  get '/sequoia_number', to: 'searches#sequoia_number',
-                         as: :sequoia_number_path
+  root 'sequoia#show'
 
-  get '/search_sequoia_number', to: 'searches#search_sequoia_number',
+  get '/sequoia_number', to: 'sequoia#show'
+
+  get '/sequoia_number/search', to: 'sequoia#search',
                                 as: :search_sequoia_number_path
 end
