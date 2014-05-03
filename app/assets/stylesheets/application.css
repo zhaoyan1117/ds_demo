@@ -28,6 +28,15 @@ body {
 	min-height: 100%;
 }
 
+a {
+	text-decoration: none;
+	color: black;
+}
+
+a:hover {
+	color: #268ED4;
+}
+
 #title {
 	padding-top: 10px;
 	text-align: center;
@@ -36,36 +45,10 @@ body {
 	border-bottom: 1px solid black;
 }
 
-#sequoia svg {
-	display: block;
-	margin-right: auto;
-	margin-left: auto;
-	box-shadow: 0 0 0.1em black;
-}
-
-#sequoia-form {
-	text-align: center;
-}
-
-#sequoia-desc {
+#navi {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border-bottom: 1px solid black;
 	text-align: center;
 	font-size: 1em;
-	margin-bottom: 15px;
-}
-
-#source, #target {
-    border: 0;
-    outline: 0;
-    background: transparent;
-    border-bottom: 2px solid black;
-	font-size: 1em;
-	text-align: center;
-}
-
-#sequoia-form-submit {
-	font-size: 1em;
-	background: none;
-	color: black;
-	cursor: pointer;
-	border: none;
 }

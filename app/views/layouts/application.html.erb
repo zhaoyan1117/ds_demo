@@ -1,13 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>DsDemo</title>
+  <title>So, Sequoia</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-<div id='title'>Data Science Final Project</div>
+<div id='title'>So, Sequoia</div>
+<div id='navi'>
+	<%= link_to 'Sequoia Number', sequoia_number_path %> |
+	Analysis1 |
+	Analysis2 |
+	<%= link_to 'About', about_path %>
+</div>
 <%= yield %>
 </body>
 </html>
