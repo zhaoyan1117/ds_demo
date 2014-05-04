@@ -3,9 +3,9 @@
         <%= form_tag search_sequoia_number_path, method: 'get' do %>
           <p>
             What's the degree of separation between
-            <%= text_field_tag :source %>
+            <%= text_field_tag :source, nil, data: {autocomplete_source: search_auto_complete_path} %>
             and
-            <%= text_field_tag :target, 'Sequoia Capital' %> ?
+            <%= text_field_tag :target, 'Sequoia Capital', data: {autocomplete_source: search_auto_complete_path} %> ?
             <%= submit_tag "Tell me!", id: 'sequoia-form-submit' %>
           </p>
         <% end %>

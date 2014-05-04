@@ -42,6 +42,7 @@ class Path
   end
 
   def as_json(option = {})
+    return nil unless @path
     to_d3_force_data.as_json(option)
   end
 
