@@ -29,7 +29,8 @@
     <script src="http://d3js.org/d3.v3.min.js"></script>
     <script>
         var width = 950,
-            height = 500
+            height = 500,
+            distance = 700
 
         var svg = d3.select("#sequoia").append("svg")
             .attr("width", width)
@@ -37,7 +38,6 @@
 
         var force = d3.layout.force()
             .gravity(.05)
-            .distance(250)
             .charge(-400)
             .size([width, height]);
 
@@ -76,6 +76,7 @@
 
         function visualizeit() {
             force
+                .distance(distance/(data.degrees*2))
                 .nodes(data.nodes)
                 .links(data.links)
                 .start();
