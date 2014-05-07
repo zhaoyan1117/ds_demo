@@ -13,4 +13,7 @@ Rails.application.routes.draw do
 
   get '/about', to: 'statics#about',
                 as: :about
+
+  get '/investment/nasdaq', to: 'investment#show_nasdaq'
+  get '/investment/unemployment', to: 'investment#show_unemployment'
 end
