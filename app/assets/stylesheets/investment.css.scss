@@ -1,3 +1,48 @@
 // Place all the styles related to the investment controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: auto;
+}
+
+.axis {
+  font-size: 1em;
+}
+
+.bar {
+  fill: #268ED4;
+}
+.y.axisRight text {
+  fill: #268ED4;
+}
+
+.line {
+  fill: none;
+  stroke: black;
+  stroke-width: 1.5px;
+}
+.y.axisLeft text {
+  fill: black;
+}
+
+#investment-graph svg {
+  display: block;
+  margin-top: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  box-shadow: 0 0 0.1em black;
+}
+
+#investment-title {
+  margin-top: 15px;
+  font-size: 1.25em;
+  text-align: center;
+}
+
+#vs {
+  color: #268ED4;
+}

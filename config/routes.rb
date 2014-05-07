@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get 'static/about'
-
   root 'sequoia#show'
 
   get '/sequoia_number', to: 'sequoia#show',
@@ -14,6 +12,8 @@ Rails.application.routes.draw do
   get '/about', to: 'statics#about',
                 as: :about
 
-  get '/investment/nasdaq', to: 'investment#show_nasdaq'
-  get '/investment/unemployment', to: 'investment#show_unemployment'
+  get '/investment/nasdaq', to: 'investment#show_nasdaq',
+                            as: :nasdaq_analysis
+  get '/investment/unemployment', to: 'investment#show_unemployment',
+                            as: :unemployment_analysis
 end
