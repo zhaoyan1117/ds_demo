@@ -24,9 +24,9 @@ html {
 }
 
 body {
-	width: 960px;
 	margin: 0 auto;
-	min-height: 100%;
+	width: 960px;
+	height: 100%;
 }
 
 a {
@@ -36,6 +36,13 @@ a {
 
 a:hover {
 	color: #268ED4;
+}
+
+#content {
+	min-height: 100%;
+	height: auto !important;
+	height: 100%;
+	margin: 0 auto -50px;
 }
 
 #title {
@@ -51,5 +58,12 @@ a:hover {
 	padding-bottom: 10px;
 	border-bottom: 1px solid black;
 	text-align: center;
-	font-size: 1em;
+	font-size: 1.2em;
+}
+
+#footer {
+	border-top: 1px solid black;
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
 }
