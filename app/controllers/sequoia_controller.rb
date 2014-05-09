@@ -13,7 +13,7 @@ class SequoiaController < ApplicationController
     @path = ShortestPathFinder.new(@source, @target).find
 
     logger.debug { "Search path:" }
-    logger.debug { @path.to_s }
+    logger.debug { @path.inspect }
 
     if @path
       render json: @path

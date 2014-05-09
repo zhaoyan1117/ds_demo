@@ -1,2 +1,94 @@
-<h1>Statics#about</h1>
-<p>Find me in app/views/statics/about.html.erb</p>
+<h2>Who are we</h2>
+<div class='about-content'>
+	We are <a href="http://yanzhao.me">Yan Zhao</a> and Weijie Li, group <b>Unicode</b> from CS194 Data Science @ UC Berkely. This is a demo for our final project.
+</div>
+
+<h2>Overview</h2>
+<div class='about-content'>
+	<p>
+		Not really a problem, but fun facts we are trying to discover.
+	</p>
+
+	<p>
+		Sequoia Capital is a well known technology venture company, and companies like Whatsapp, Google, Apple, Facebook and many other big name companies have received venture from Sequoia.
+	</p>
+
+	<p>
+		We are curious in the pattern of Sequoia’s investment activities, and more generalized, we would like to probe how technology investment activities are related to U.S. economy.
+	</p>
+
+	<p>
+		Thus, we created this product, dynamic Sequoia Number query and analysis of technology investment and US Economy.
+	</p>
+</div>
+
+<h2>Related System</h2>
+<div class='about-content'>
+	<p>
+		Not really. The most similar system we could find is <b>Six Degree of Kevin Bacon</b> and <b>Erdős Number</b> project. But they are about
+		mathmatician and hollywood celebrities, not investing companies.
+	</p>
+</div>
+
+<h2>Tools</h2>
+<div class='about-content'>
+	<p>
+		We have used several tools for our product.
+	</p>
+	<p>
+		For the data cleanning process, we have used <b>OpenRefine</b>. We have used <b>Neo4j</b> graph database to achieve real time graph traversal
+		in order to query shortest path between two investment compnaies. As for the demonstration, we have used <b>Ruby on Rails</b> to build this
+		interactive demo. Last but not least, we have <b>D3js</b> as our visualization tools which works fantastically.
+	</p>
+</div>
+
+<h2>Data Sets</h2>
+<div class='about-content'>
+	<p>
+		We have used three data sets total.
+	</p>
+	<p>
+		The major one is <a href="http://info.crunchbase.com/about/crunchbase-data-exports/">investment activity data sets from crunchbase</a>. This database is a schema oriented datasets that stores in a Excel file. The size of this data sets is almost 100 thousand records.
+	</p>
+	<p>
+		Nasdaq.
+	</p>
+	<p>
+		Unemployment.
+	</p>
+</div>
+
+<h2>Data Product</h2>
+<div class='about-content'>
+	<p>
+		Our product is a Software as a Service to let people interactively query the <b>investing distance</b> between two venture company.
+	</p>
+
+	<p>
+		Also, we have added two static analysis about investing activity vs nasdaq indices and US unemployment rate, respectively.
+	</p>
+</div>
+
+<h2>Data Product</h2>
+<div class='about-content'>
+	<p>
+		One major problem we have encountered is in cleaning up the data due to the precense of Unicode, we end up configure our database to allow
+		Unicode storage, which works quite well.
+	</p>
+
+	<p>
+		Another problem would be finding an graph database services to store our data online is not very cheap, so we decide demo the app locally.
+	</p>
+</div>
+
+<h2>Future Work</h2>
+<div class='about-content'>
+	<p>
+		Hosting our app online so more people can play with it!
+	</p>
+
+	<p>
+		Also, we are very interested in the relationship between a investing company's valuation and its Sequoia Number. This is something we would
+		like to investigate.
+	</p>
+</div>

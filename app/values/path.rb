@@ -20,6 +20,7 @@ class Path
   end
 
   def degrees
+    return 0 unless @path
     (@path.size+1)/2 - 1
   end
 
