@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+body {
+  font: 10px sans-serif;
+}
+
+header{
+  font:40px sans-serif;
+}
+
+p1{
+  font: 16px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+  display: none;
+}
+
+.axis {
+  font: 10px sans-serif;
+}
+
+
+.line {
+  fill: none;
+  stroke: black;
+  stroke-width: 1.5px;
+}
+
+.bar {
+  fill: steelblue;
+}
+
+.y.axisRight text {
+        fill: orange;
+      }
+      
+.y.axisLeft text {
+  fill: steelblue;
+}
+
+</style>
+<body>
+  <header>
+  Investment and Unemployment Rate Over Every Month
+  </header>
+<script src="http://d3js.org/d3.v3.js"></script>
+<script>
+
+var margin = {top: 20, right: 20, bottom: 30, left: 50},
+    width = 960 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
+
+
+var x = d3.time.scale()
+    .range([0, width-63]);
+
+var y = d3.scale.linear()
+    .range([height, 0]);
+// for y2
+var x2 = d3.scale.ordinal()
+    .rangeBands([0, width-63], .1);
+
+var y2 = d3.scale.linear()
+    .range([height, 0]);
+
+var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("top");
+
+
+var yAxis = d3.svg.axis()
+    .scale(y)
+    .orient("left");
+//graph2
+var x2Axis = d3.svg.axis()
+    .scale(x)
+    .orient("top");
+
+var yAxisRight = d3.svg.axis()
+    .scale(y2)
+    .orient("right")
+    //.tickFormat(d3.format(".0f"));
+
+
+var line = d3.svg.line()
+    .x(function(d) { return x(d.date); })
+    .y(function(d) { return y(d.rate); });
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+
+//bar graph for amount 
+d3.tsv("date_investmentAmount.tsv", type, function(error, data) {
+  x2.domain(data.map(function(d) { 
+    //console.log(d.date)
+    return d.date; }));
+  y2.domain([0, d3.max(data, function(d) { 
+    return parseFloat(d.amount); })]);
+
+
+  svg.append("g")
+      .attr("class", "y axis axisRight")
+      .attr("transform", "translate(" + (width-65) + ",0)")
+      .call(yAxisRight)
+      .append("text")
+      .attr("transform", "translate(" + (55) + ",0)")
+      .attr("y", 0)
+      .attr("dy", ".71em")
+      .style("text-anchor", "end")
+      .text("Amount ($)");
+
+console.log(y2.domain());
+  svg.selectAll(".bar")
+      .data(data)
+    .enter().append("rect")
+      .attr("class", "bar")
+      .attr("x", function(d) { return x2(d.date); })
+      .attr("width", x2.rangeBand())
+      .attr("y", function(d) { return y2(d.amount); })
+      .attr("height", function(d) { 
+        return (height - y2(d.amount)); }
+
+      );
+
+});
+// line graph for unemployment rate
+d3.tsv("unemploymentRate.tsv", function(error, data) {
+  data.forEach(function(d) {
+    console.log(d.date);
+    d.date = Date.parse(d.date);
+    console.log(d.date);
+    d.rate = +(parseFloat(d.rate)/100.0);
+    console.log(d.rate);
+  });
+
+  x.domain(d3.extent(data, function(d) { 
+    //console.log(d.date)
+    return d.date; }));
+  y.domain(d3.extent(data, function(d) { 
+    //console.log(d.amount)
+    return parseFloat(d.rate); }));
+
+  svg.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis);
+
+
+  svg.append("g")
+      .attr("class", "y axis axisLeft")
+      .call(yAxis)
+    .append("text")
+      //.attr("transform", "rotate(-90)")
+      .attr("transform", "translate(0,-20)")
+      .attr("y", 6)
+      .attr("dy", ".71em")
+      //.style("text-anchor", "end")
+      .text("Rate");
+
+
+  svg.append("path")
+      .datum(data)
+      .attr("class", "line")
+      .attr("d", line);
+});
+
+
+function type(d) {
+  d.frequency = +d.frequency;
+  return d;
+}
+
+</script>
+<p1>
+  <br>
+  
+</p1>
+</body>
+</html>
